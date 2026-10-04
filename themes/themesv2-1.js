@@ -722,15 +722,15 @@ var events = {
     up: "touchend"
   }
 };
-var initialY = 0,
-  newY = 0;
+var initialX = 0,
+  newX = 0;
 var eventMove = function eventMove(e) {
-  var newY = !isTouchDevice() ? e.clientY : e.touches[0].clientY;
-  if (initialY - 50 > newY) {
+  var newX = !isTouchDevice() ? e.clientX : e.touches[0].clientX;
+  if (initialX - 50 > newX) {
     pauseInvitation();
     swipeUp();
   }
-  if (initialY < newY - 50) {
+  if (initialX < newX - 50) {
     swipeDown();
     pauseInvitation();
   }
@@ -740,7 +740,7 @@ var eventUp = function eventUp(e) {
 };
 var eventDown = function eventDown(e) {
   if (e.cancelable) e.preventDefault();
-  initialY = !isTouchDevice() ? e.clientY : e.touches[0].clientY;
+  initialX = !isTouchDevice() ? e.clientX : e.touches[0].clientX;
   window.addEventListener(events[deviceType].up, eventUp, false);
   window.addEventListener(events[deviceType].move, eventMove, false);
 };
