@@ -256,7 +256,7 @@
       </div>
     <div class="text-left pl-3 mb-3 animate__animated animate__fadeInUp animate__slower" style="position:relative;">
         <span style="height:16px;width:16px;position:absolute;background-color:var(--inv-accent);border-radius:100%;transform:translateX(-24px) translateY(4px);"></span>
-<span style="height:100%;width:2px;position:absolute;background-color:var(--inv-accent);transform:translateX(-17px) translateY(20px);"></span><div class="editable font-weight-bold mb-2" style="font-size:14.4px;">Relationship (2025)</div><div class="editable quotes" style="font-size:14.4px;">Semakin dekat dan menemukan banyak kesamaan.</div>
+<span style="height:100%;width:2px;position:absolute;background-color:var(--inv-accent);transform:translateX(-17px) translateY(20px);"></span><div class="editable font-weight-bold mb-2" style="font-size:14.4px;">Relationship (2025)</div><div class="editable quotes" style="font-size:14.4px;">Setelah 2 tahun tidak pernah bertemu akhirnya dipertemukan kembali dan semakin dekat dan menemukan banyak kesamaan.</div>
         
       </div><div class="text-left pl-3 mb-3 animate__animated animate__fadeInUp animate__slower" style="position:relative;">
         <span style="height:16px;width:16px;position:absolute;background-color:var(--inv-accent);border-radius:100%;transform:translateX(-24px) translateY(4px);"></span>
@@ -264,7 +264,7 @@
         
       </div><div class="text-left pl-3 mb-3 animate__animated animate__fadeInUp animate__slower" style="position:relative;">
         <span style="height:16px;width:16px;position:absolute;background-color:var(--inv-accent);border-radius:100%;transform:translateX(-24px) translateY(4px);"></span>
-<div class="editable font-weight-bold mb-2" style="font-size:14.4px;">Married (2026)</div><div class="editable quotes" style="font-size:14.4px;">Kini, kami berdua membuka lembaran baru sebagai pasangan hidup. Sebuah perjalanan baru dimulai dengan harapan untuk terus bertumbuh dan berjalan bersama.</div>
+<div class="editable font-weight-bold mb-2" style="font-size:14.4px;">Married (2026)</div><div class="editable quotes" style="font-size:14.4px;text-shadow:1px 1px 3px #fff, -1px -1px 3px #fff, 0 0 8px #fff;">Kini, kami berdua membuka lembaran baru sebagai pasangan hidup. Sebuah perjalanan baru dimulai dengan harapan untuk terus bertumbuh dan berjalan bersama.</div>
         
       </div></div>
   </div>
@@ -777,15 +777,34 @@
                     btn.addEventListener('click', function() {
                         var music = document.getElementById('music');
                         if (music) {
-                            music.currentTime = 17;
+                            try {
+                                music.currentTime = 127;
+                            } catch (e) {}
+                            if (music.readyState < 1) {
+                                music.addEventListener('loadedmetadata', function() {
+                                    try { music.currentTime = 127; } catch (e) {}
+                                }, { once: true });
+                            }
                         }
                     }, true);
                 });
             }
+            function setupAudioLoop() {
+                var music = document.getElementById('music');
+                if (!music) return;
+                var LOOP_END = 249; // 4:09
+                music.addEventListener('timeupdate', function() {
+                    if (music.currentTime >= LOOP_END) {
+                        try { music.currentTime = 0; } catch (e) {}
+                    }
+                });
+            }
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', setupAudioStart);
+                document.addEventListener('DOMContentLoaded', setupAudioLoop);
             } else {
                 setupAudioStart();
+                setupAudioLoop();
             }
         })();
     </script>
