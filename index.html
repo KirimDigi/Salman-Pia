@@ -778,11 +778,11 @@
                         var music = document.getElementById('music');
                         if (music) {
                             try {
-                                music.currentTime = 127;
+                                music.currentTime = 0;
                             } catch (e) {}
                             if (music.readyState < 1) {
                                 music.addEventListener('loadedmetadata', function() {
-                                    try { music.currentTime = 127; } catch (e) {}
+                                    try { music.currentTime = 0; } catch (e) {}
                                 }, { once: true });
                             }
                         }
@@ -792,7 +792,7 @@
             function setupAudioLoop() {
                 var music = document.getElementById('music');
                 if (!music) return;
-                var LOOP_END = 249; // 4:09
+                var LOOP_END = 57; // 0:57
                 music.addEventListener('timeupdate', function() {
                     if (music.currentTime >= LOOP_END) {
                         try { music.currentTime = 0; } catch (e) {}
